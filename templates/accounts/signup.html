@@ -1,0 +1,50 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Signup{% endblock %}
+{% block body %}
+{% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <div class="alert alert-danger mt-3">
+                <strong>{{ error }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger mt-3">
+                <strong>{{ error }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+<h3 class="mb-4 text-center">Signup</h3>
+<form method="POST" class="signin-form">
+	{% csrf_token %}
+	<div class="form-group">
+		{% render_field form.username class="form-control" placeholder="Username" %}
+		{% comment %} <input type="text" class="form-control" placeholder="Username" required> {% endcomment %}
+	</div>
+	<div class="form-group">
+		{% render_field form.email class='form-control' placeholder="Email" %}
+		{% comment %} <input type="text" class="form-control" placeholder="Email" required> {% endcomment %}
+	</div>
+	<div class="form-group">
+		{% render_field form.password1 class='form-control password-field' placeholder="Password" %}
+		{% comment %} <input id="password-field" type="password" class="form-control password" placeholder="Password" required> {% endcomment %}
+		<span toggle="#password1" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+	</div>
+	<div class="form-group">
+		{% render_field form.password2 class='form-control password-field' placeholder="Password" %}
+		{% comment %} <input id="password-field" type="password" class="form-control" placeholder="Repeat Password" required> {% endcomment %}
+		<span toggle="#password2" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+	</div>
+	
+	<div class="form-group">
+		<button type="submit" class="form-control btn btn-primary submit px-3">Sign Up</button>
+	</div>
+</form>
+<p class="w-100 text-center">Have an account? <a href="{% url "accounts:login" %}" style="color: #fff; text-decoration:underline;">Login</a></p>
+
+{% endblock %}

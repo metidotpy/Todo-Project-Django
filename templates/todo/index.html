@@ -1,0 +1,66 @@
+{% extends "todo/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Home{% endblock title %}
+
+{% block body %}
+<div class="todo__container">
+    <form method="POST" class="todo__form">
+        {% csrf_token %}
+        <div class="todo__form--container">
+            {% render_field form.text placeholder="Enter your task" class="todo__form--input" %}
+            {% comment %} <input placeholder="Enter your task" type="text" class="todo__form--input"> {% endcomment %}
+            <button class="btn todo__form--btn" type="submit"><i class='bx bx-plus'></i></button>
+        </div>
+        <span class="error-text hidden"><i class='bx bxs-error-circle'></i> Please enter something to input</span>
+    </form>
+    <div class="line"></div>
+    <div class="todo__list">
+        {% for todo in todos %}
+            {% if not todo.is_done %}
+            <div class="todo__list--item">
+                <p class="todo__list--text">{{ todo.text }}</p>
+    
+                <div class="todo__list--btns">
+                    <a href="{% url "todo:update" todo.id %}" class="btn todo__list--btn todo__list--btn-check"><i class='bx bx-pencil'></i></a>
+                    <a href="{% url "todo:delete" todo.id %}" class="btn todo__list--btn todo__list--btn-delete"><i class='bx bxs-trash'></i></a>
+                    <a href="{% url "todo:change" todo.id %}" class="btn todo__list--btn todo__list--btn-check"><i class='bx bx-check'></i></a>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+        <div style="margin-top: 0.7rem;" class="line"></div>
+        {% for todo in todos %}
+            {% if todo.is_done %}
+            <div class="todo__list--item todo__list--checked">
+                <p class="todo__list--text">{{ todo.text }}</p>
+    
+                <div class="todo__list--btns">
+                    <a href="{% url "todo:update" todo.id %}" class="btn todo__list--btn todo__list--btn-check"><i class='bx bx-pencil'></i></a>
+                    <a href="{% url "todo:delete" todo.id %}" class="btn todo__list--btn todo__list--btn-delete"><i class='bx bxs-trash'></i></a>
+                    <a href="{% url "todo:change" todo.id %}" class="btn todo__list--btn todo__list--btn-check"><i class='bx bx-check'></i></a>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+        <!-- <div class="todo__list--item" data-id="12">
+            <p class="todo__list--text">Go shopping</p>
+
+            <div class="todo__list--btns">
+                <button class="btn todo__list--btn todo__list--btn-delete"><i class='bx bxs-trash'></i></button>
+                <button class="btn todo__list--btn todo__list--btn-check"><i class='bx bx-check'></i></button>
+            </div>
+        </div> -->
+
+        <!-- <div class="todo__list--item todo__list--checked" data-id="13">
+            <p class="todo__list--text">Go shopping</p>
+
+            <div class="todo__list--btns">
+                <button class="btn todo__list--btn todo__list--btn-delete"><i class='bx bxs-trash'></i></button>
+                <button class="btn todo__list--btn todo__list--btn-check"><i class='bx bx-check'></i></button>
+            </div>
+        </div> -->
+    </div>
+</div>
+{% endblock %}

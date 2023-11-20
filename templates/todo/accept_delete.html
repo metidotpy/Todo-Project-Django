@@ -1,0 +1,14 @@
+{% extends "todo/base.html" %}
+{% load static %}
+
+{% block title %}Delete{% endblock title %}
+
+{% block body %}
+<div class="todo__container">
+    <form method="POST" class="todo__form todo__form--delete">
+        {% csrf_token %}
+        <h3 class="todo__form--alert-text">Are you sure for delete "{{ object.text }}" task?</h3>
+        <button class="todo__form--btn todo__form--btn-danger" type="submit">Delete</button>
+    </form>
+</div>
+{% endblock body %}

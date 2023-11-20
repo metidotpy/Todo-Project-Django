@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root{
+    --color-bg: #152641;
+    --color-bg-low-opacity: #152641df;
+    --color-text: #222;
+    --color-primary: #fff;
+    --color-error: #FF9494;
+    --color-success: #33872d;
+    --color-delete: #ff1414;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: var(--color-bg);
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* some needs */
+.btn{
+    border: none;
+    background: transparent;
+    font-size: 24px;
+    cursor: pointer;
+    /* color: #; */
+    margin-left: 10px;
+}
+
+.line{
+    width: 100%;
+    height: 1.5px;
+    background: var(--color-text);
+}
+
+.hidden {
+    opacity: 0;
+    z-index: -25 !important;
+}
+/* End of some needs */
+
+/* . TODO container */
+
+.todo__container{
+    width: 60dvw;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    background-color: var(--color-primary);
+    border-radius: 10px;
+}
+
+.todo__form{
+    width: 100%;
+}
+
+.todo__form--container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.todo__form--input{
+    width: 95%;
+    padding: 0.5rem;
+    border: none;
+    outline: none;
+    background-color: var(--color-bg-low-opacity);
+    color: var(--color-primary);
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.todo__form--btn{
+    color: var(--color-success);
+}
+
+.error-text{
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+    color: var(--color-error);
+    margin-top: 5px;
+    font-size: 10px;
+    transition: opacity 0.3s;
+}
+
+
+/* END TODO container */
+
+/* . TODO List */
+.todo__list {
+    width: 100%;
+}
+.todo__list--item:not(:first-child){
+    margin-top: 0.7rem !important;
+}
+.todo__list--item {
+    width: 100%;
+    padding: 0.3rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-bg-low-opacity);
+    color: var(--color-primary);
+    border-radius: 10px;
+    height: 3rem;
+    transition:opacity 0.3s ease-out;
+    animation: unchecked linear 0.3s 1 forwards;
+}
+.todo__list--checked {
+    animation: checked linear 0.3s 1 forwards;
+}
+
+.todo__list--item .todo__list--text {
+    font-size: 12px;
+}
+.todo__list--btns .todo__list--btn{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    color: var(--color-text);
+    background-color: var(--color-primary);
+    padding: 7px;
+    border-radius: 3px;
+}
+.todo__form--alert-text {
+
+    color: var(--color-delete);
+    font-weight: 600;
+}
+.todo__list--btns .todo__list--btn-delete {
+    color: var(--color-delete);
+}
+.todo__list--btns .todo__list--btn-check{
+    color: var(--color-success);
+}
+
+.todo__form--delete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    flex-direction: column;
+}
+.todo__form--btn-danger {
+    background: var(--color-delete);
+    color: var(--color-primary);
+    border: none;
+    outline: none;
+    padding: 0.5rem 0.7rem;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+/* END TODO List */
+
+/* Navbar */
+.navbar{
+    top: 0;
+    position: absolute;
+    width: 100%;
+    align-self: flex-start;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem 2rem;
+    background: var(--color-primary);
+    border-radius: 0 0 30px 30px;
+}
+
+.navbar--links,
+.navbar--logout{
+    display: flex;
+    /* width: 10rem; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.navbar--links a,
+.navbar--logout a{
+    font-size: 14px;
+    color: var(--color-text) !important;
+}
+
+.navbar--links a:hover,
+.navbar--logout a:hover{
+    color: var(--color-bg) !important;
+}
+
+.navbar--side-link{
+    width: 2px;
+    height: 1.5rem;
+    background: var(--color-bg);
+}
+/* END Navbar */
+
+
+/* Animation */
+@keyframes checked{
+    to {background-color: var(--color-success);}
+}
+
+@keyframes unchecked{
+    to {background-color: var(--color-bg-low-opacity);}
+}
+/* END Animation */
+
+a{
+    text-decoration: none !important;
+}

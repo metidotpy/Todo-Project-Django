@@ -1,0 +1,19 @@
+{% extends "todo/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Update{% endblock title %}
+
+{% block body %}
+<div class="todo__container">
+    <form method="POST" class="todo__form">
+        {% csrf_token %}
+        <div class="todo__form--container">
+            {% render_field form.text placeholder="Enter your task" class="todo__form--input" %}
+            {% comment %} <input placeholder="Enter your task" type="text" class="todo__form--input"> {% endcomment %}
+            <button class="btn todo__form--btn" type="submit"><i class='bx bx-check'></i></button>
+        </div>
+        <span class="error-text hidden"><i class='bx bxs-error-circle'></i> Please enter something to input</span>
+    </form>
+</div>
+{% endblock body %}
