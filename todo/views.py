@@ -4,6 +4,7 @@ from django.views.generic import View, CreateView, UpdateView, DeleteView, ListV
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Todo
 from .forms import TodoForm
+from .mixins import HomeIfNotUserMixin
 
 # Create your views here.
 
@@ -33,21 +34,23 @@ class TodoHome(LoginRequiredMixin, View):
       return redirect(self.success_url)
     return render(request, self.template_name, {"form": form, "todos": todos})
 
-class TodoUpdateView(LoginRequiredMixin, UpdateView):
+class TodoUpdateView(LoginRequiredMixin, HomeIfNotUserMixin, UpdateView):
   model = Todo
   # fields = ['text']
   form_class = TodoForm
   template_name = 'todo/update_todo.html'
   success_url = reverse_lazy('todo:home')
 
-class TodoDeleteView(LoginRequiredMixin, DeleteView):
+class TodoDeleteView(LoginRequiredMixin, HomeIfNotUserMixin, DeleteView):
   model = Todo
   template_name = 'todo/accept_delete.html'
   success_url = reverse_lazy('todo:home')
 
-def change_todo(request, pk):
-  todo = Todo.objects.get(pk=pk)
-  todo.is_done = not todo.is_done
-  todo.save()
+
+class ChangeTodoView(LoginRequiredMixin, HomeIfNotUserMixin, View):
+  def get(self, request, pk, *args, **kwargs):
+    todo = Todo.objects.get(pk=pk)
+    todo.is_done = not todo.is_done
+    todo.save()
   
-  return redirect('todo:home')
+    return redirect('todo:home')

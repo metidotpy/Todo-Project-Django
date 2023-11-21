@@ -7,5 +7,5 @@ urlpatterns = [
     path('', views.TodoHome.as_view(), name='home'),
     path('update/<int:pk>/', views.TodoUpdateView.as_view(), name='update'),
     path('delete/<int:pk>/', views.TodoDeleteView.as_view(), name='delete'),
-    path('change/<int:pk>/', views.change_todo, name='change'),
+    path('change/<int:pk>/', views.ChangeTodoView.as_view(), name='change'),
 ]
